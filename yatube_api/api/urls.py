@@ -1,16 +1,14 @@
-from rest_framework.routers import SimpleRouter
-from api import views
 from django.urls import include, path
-
+from api import views
 from rest_framework.authtoken import views
+from rest_framework.routers import SimpleRouter
 
-from .views import PostViewSet, GroupViewSet, CommentViewSet
+from .views import CommentViewSet, GroupViewSet, PostViewSet
 
-
-router = SimpleRouter()
-router.register("posts", PostViewSet, basename="post")
-router.register("groups", GroupViewSet, basename="group")
-router.register(
+v1_router = SimpleRouter()
+v1_router.register("posts", PostViewSet, basename="post")
+v1_router.register("groups", GroupViewSet, basename="group")
+v1_router.register(
     r"posts/(?P<post_id>\d+)/comments",
     CommentViewSet,
     basename="comments"
@@ -20,6 +18,6 @@ router.register(
 app_name = "api"
 
 urlpatterns = [
-    path("api/v1/", include(router.urls)),
-    path("api/v1/api-token-auth/", views.obtain_auth_token),
+    path("v1/", include(v1_router.urls)),
+    path("v1/api-token-auth/", views.obtain_auth_token),
 ]
