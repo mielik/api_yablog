@@ -1,2 +1,2 @@
-# api_yatube
-api_yatube
+# api_yablog
+api_yablog
